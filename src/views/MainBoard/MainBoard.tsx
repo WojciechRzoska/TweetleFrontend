@@ -1,11 +1,11 @@
-import SideMenu from 'components/organisms/SideMenu/SideMenu';
-import React from 'react';
+import PostBoard from 'components/organisms/PostsBoard/PostBoard';
+import RecommendedSide from 'components/organisms/RecommendedSide/RecommendedSide';
 import { Wrapper } from './MainBoard.style';
 
 const MainBoard = () => {
   return (
     <Wrapper>
-      <SideMenu />
+      <PostBoard />
     </Wrapper>
   );
 };
