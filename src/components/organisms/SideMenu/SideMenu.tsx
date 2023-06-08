@@ -1,5 +1,6 @@
 import React from 'react';
-import { CompanyLogo } from 'components/atoms/CompanyLogo/CompanyLogo';
+import { StyledButton } from 'components/atoms/Button/Button';
+import { AuthProvider } from 'hooks/useAuth';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import {
   NavItem,
@@ -12,6 +13,7 @@ import {
 } from './SideMenu.style';
 
 const SideMenu = () => {
+  const { signOut } = AuthProvider();
   return (
     <Wrapper>
       <StyledList>
@@ -21,7 +23,7 @@ const SideMenu = () => {
           </StyledNavLink>
         </NavItem>
         <NavItem>
-          <StyledNavLink to="/">
+          <StyledNavLink to="/test">
             <StyledFontAwesomeIcon icon={faHouse} />
             <LinkText>Link</LinkText>
           </StyledNavLink>
@@ -43,6 +45,15 @@ const SideMenu = () => {
             <StyledFontAwesomeIcon icon={faHouse} />
             <LinkText>Link</LinkText>
           </StyledNavLink>
+        </NavItem>
+        <NavItem>
+          <StyledButton
+            onClick={() => {
+              signOut();
+            }}
+          >
+            Logout
+          </StyledButton>
         </NavItem>
       </StyledList>
     </Wrapper>

@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+import { forwardRef } from 'react';
 import { Input } from 'components/atoms/Input/Input';
 import { Wrapper } from './FormField.style';
 
@@ -6,27 +8,23 @@ interface FormFieldProps {
   name: string;
   // eslint-disable-next-line react/require-default-props
   type?: string;
-  value: string;
   placeholder: string;
 }
-const FormField = ({
-  id,
-  name,
-  type = 'text',
-  value,
-  placeholder,
-}: FormFieldProps) => {
-  return (
-    <Wrapper>
-      <Input
-        name={name}
-        id={id}
-        type={type}
-        value={value}
-        placeholder={placeholder}
-      />
-    </Wrapper>
-  );
-};
+const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
+  ({ id, name, type = 'text', placeholder, ...props }, ref) => {
+    return (
+      <Wrapper>
+        <Input
+          name={name}
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          {...props}
+          ref={ref}
+        />
+      </Wrapper>
+    );
+  }
+);
 
 export default FormField;

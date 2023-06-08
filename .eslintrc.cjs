@@ -23,6 +23,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'import/no-extraneous-dependencies': 0,
     'import/prefer-default-export': 'off',
+    'react/jsx-props-no-spreading': 0,
     'react/function-component-definition': [
       2,
       {

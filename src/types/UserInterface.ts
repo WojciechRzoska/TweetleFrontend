@@ -1,4 +1,4 @@
-export interface PostAuthor {
+export interface User {
   id: number;
   nickname: string;
   email: string;

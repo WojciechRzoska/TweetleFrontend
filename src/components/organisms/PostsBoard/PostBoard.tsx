@@ -1,16 +1,20 @@
 import Post from 'components/molecues/Post/Post';
 import React, { useEffect, useState } from 'react';
 import { IPost } from 'types/PostInterface';
-import axios from 'axios';
+import { AuthProvider } from 'hooks/useAuth';
 import { Wrapper } from './PostBoard.style';
 
 const PostBoard = () => {
+  const { authApi } = AuthProvider();
   const [posts, setPosts] = useState<IPost[]>([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:80/api/v1/posts?users=true').then((res) => {
-      setPosts(res.data.data);
-    });
+    authApi()
+      .get('api/v1/posts?users=true')
+      .then((res) => {
+        setPosts(res.data.data);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
