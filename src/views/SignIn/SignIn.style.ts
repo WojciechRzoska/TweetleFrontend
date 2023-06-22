@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  height: 90vh;
+  height: 85vh;
   width: 100vw;
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
@@ -20,6 +20,7 @@ export const SignInContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  max-height: 600px;
 
   @media (min-width: 60em) {
     gap: 1rem;

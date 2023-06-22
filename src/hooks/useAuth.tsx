@@ -4,16 +4,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from 'store/api/userSlice';
 import { RootState } from 'store';
 
+interface ErrorResponse {
+  response: {
+    data: {
+      InvalidEmailMessage?: string;
+      InvalidPasswordMessage?: string;
+    };
+  };
+}
+interface ErrorMessages {
+  InvalidEmailMessage?: string;
+  InvalidPasswordMessage?: string;
+}
+
 export const AuthProvider = () => {
   const [token, setToken] = useState<string | null>(
     useSelector((state: RootState) => state.authUser.token)
   );
+  const [errorMessages, setErrorMessages] = useState({});
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     setToken(sessionStorage.getItem('APItoken'));
-    // console.log(token);
-  }, [token]);
+    console.log(errorMessages);
+  }, [errorMessages]);
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -25,7 +40,10 @@ export const AuthProvider = () => {
       setToken(response.data.token);
       sessionStorage.setItem('APItoken', response.data.token);
     } catch (e) {
-      console.log(e);
+      const errorResponse = e as ErrorResponse;
+      if (errorResponse.response.data.InvalidEmailMessage) {
+        console.log('abc');
+      }
     }
   };
 
