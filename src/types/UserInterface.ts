@@ -10,12 +10,20 @@ export interface User {
 
 export interface RegisterUser {
   nickname: string;
-  email: string;
-  avatar: File;
-  password: string;
-  confirmedPassword: string;
+  registerEmail: string;
+  avatar: string | null;
+  registerPassword: string;
+  password_confirmation: string;
   year: number;
   month: number;
   day: number;
   bio?: string;
+}
+
+export interface ValidationPageOne {
+  nickname: string;
+  email: string;
+  avatar: File;
+  password: string;
+  confirmedPassword: string;
 }

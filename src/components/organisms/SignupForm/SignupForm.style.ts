@@ -2,19 +2,24 @@ import FormField from 'components/molecues/FormField/FormField';
 import Cropper from 'react-easy-crop';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.form`
   width: 100%;
 `;
-export const WrapperForm = styled.form`
+export const WrapperForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
   width: 100%;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
 
   @media (min-width: 60em) {
     gap: 2rem;
+  }
+  & > span {
+    margin-top: -25px;
+    color: red;
   }
 `;
 
@@ -50,12 +55,11 @@ export const AvatarUpload = styled.button`
 `;
 
 export const AvatarWrapper = styled.div`
-  height: 450px;
   display: flex;
   position: relative;
   height: 450px;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 `;
 export const ResizeWrapper = styled.div``;
 export const ResizeImage = styled.div`
@@ -68,7 +72,7 @@ export const ResizeImage = styled.div`
 
 export const SliderWrapper = styled.div`
   position: absolute;
-  bottom: 30px;
+  bottom: 50px;
   left: 50%;
   width: 50%;
   transform: translateX(-50%);

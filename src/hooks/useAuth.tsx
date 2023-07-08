@@ -6,10 +6,7 @@ import { RootState } from 'store';
 
 interface ErrorResponse {
   response: {
-    data: {
-      InvalidEmailMessage?: string;
-      InvalidPasswordMessage?: string;
-    };
+    data: ErrorMessages;
   };
 }
 interface ErrorMessages {
@@ -17,11 +14,18 @@ interface ErrorMessages {
   InvalidPasswordMessage?: string;
 }
 
+interface ErrorMessage {
+  correctEmail: boolean | undefined;
+  error: string | undefined;
+}
 export const AuthProvider = () => {
   const [token, setToken] = useState<string | null>(
     useSelector((state: RootState) => state.authUser.token)
   );
-  const [errorMessages, setErrorMessages] = useState({});
+  const [errorMessages, setErrorMessages] = useState<ErrorMessage>({
+    correctEmail: undefined,
+    error: undefined,
+  });
 
   const dispatch = useDispatch();
 
@@ -41,8 +45,18 @@ export const AuthProvider = () => {
       sessionStorage.setItem('APItoken', response.data.token);
     } catch (e) {
       const errorResponse = e as ErrorResponse;
+
       if (errorResponse.response.data.InvalidEmailMessage) {
-        console.log('abc');
+        setErrorMessages({
+          correctEmail: false,
+          error: errorResponse.response.data.InvalidEmailMessage,
+        });
+      }
+      if (errorResponse.response.data.InvalidPasswordMessage) {
+        setErrorMessages({
+          correctEmail: true,
+          error: errorResponse.response.data.InvalidPasswordMessage,
+        });
       }
     }
   };
@@ -85,5 +99,6 @@ export const AuthProvider = () => {
     token,
     signIn,
     signOut,
+    errorMessages,
   };
 };

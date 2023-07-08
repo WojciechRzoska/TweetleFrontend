@@ -33,10 +33,14 @@ export const SignInContainer = styled.div`
   }
 `;
 export const TitleSection = styled.div`
-  width: 80%;
+  h1 {
+    width: 80%;
+    text-align: left;
+  }
 
   @media (min-width: 60em) {
     h1 {
+      width: 80%;
       text-align: left;
     }
     width: 400px;

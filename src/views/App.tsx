@@ -10,9 +10,6 @@ import NoAuthenicatedApp from './NoAuthenicatedApp';
 const App = () => {
   const authToken = useSelector((state: RootState) => state.authUser.token);
 
-  useEffect(() => {
-    console.log(authToken);
-  });
   const dispatch = useDispatch();
 
   return authToken ? <AuthenticatedApp /> : <NoAuthenicatedApp />;

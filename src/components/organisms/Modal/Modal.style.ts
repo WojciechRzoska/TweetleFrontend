@@ -21,8 +21,8 @@ export const ModalWrapper = styled(ReactModal)`
   }
 
   @media (min-width: 60em) {
-    min-width: 600px;
-    min-height: 650px;
+    width: 500px;
+    min-height: 500px;
   }
 `;
 export const CloseButton = styled.button`

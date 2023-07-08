@@ -2,11 +2,13 @@
 import FormField from 'components/molecues/FormField/FormField';
 import { StyledButton } from 'components/atoms/Button/Button';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useEffect, useState } from 'react';
 import { AuthProvider } from 'hooks/useAuth';
-import ErrorMessage from 'components/molecues/ErrorMessage/ErrorMessage';
 import Signup from 'views/Singup/Signup';
-import { StyledSingupButton, Wrapper } from './SignInForm.style';
+import {
+  CreateAccountButton,
+  StyledSingupButton,
+  Wrapper,
+} from './SignInForm.style';
 import useModal from '../Modal/useModal';
 import Modal from '../Modal/Modal';
 
@@ -16,18 +18,14 @@ type Inputs = {
 };
 
 const SignInForm = () => {
-  const { api, signIn } = AuthProvider();
+  const { api, signIn, errorMessages } = AuthProvider();
   const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
+    register: signInRegister,
+    handleSubmit: signInHandleSubmit,
+    formState: { errors: signInErrors },
   } = useForm<Inputs>();
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
-  useEffect(() => {
-    console.log(errors.email);
-  });
   const onSubmit: SubmitHandler<Inputs> = (data, event) => {
     event?.preventDefault();
     api()
@@ -36,34 +34,38 @@ const SignInForm = () => {
         signIn(data.email, data.password);
       });
   };
-
   return (
-    <Wrapper onSubmit={handleSubmit(onSubmit)}>
+    <Wrapper key={1} onSubmit={signInHandleSubmit(onSubmit)}>
       <FormField
-        {...register('email', { required: true })}
+        {...signInRegister('email', { required: true })}
         id="email"
         name="email"
         placeholder="E-mail"
-        isError={errors.email}
+        isError={signInErrors.email}
+        type="email"
       />
-      {errors.email && <span>Email is required</span>}
+      {signInErrors.email && <span>Email is required</span>}
+      {errorMessages.correctEmail === false && (
+        <span>{errorMessages.error}</span>
+      )}
       <FormField
-        {...register('password', { required: true })}
+        {...signInRegister('password', { required: true })}
         id="password"
         name="password"
         type="password"
         placeholder="Password"
-        isError={errors.password}
+        isError={signInErrors.password}
       />
-      {errors.password && <span>Password is required</span>}
+      {signInErrors.password && <span>Password is required</span>}
+      {errorMessages.correctEmail && <span>{errorMessages.error}</span>}
       <StyledButton type="submit">Sign in</StyledButton>
 
-      <StyledSingupButton type="button" onClick={handleOpenModal}>
+      <CreateAccountButton type="button" onClick={handleOpenModal}>
         Create account
-      </StyledSingupButton>
+      </CreateAccountButton>
 
       <Modal isOpen={isOpen} handleClose={handleCloseModal}>
-        <Signup />
+        <Signup key={3} />
       </Modal>
     </Wrapper>
   );

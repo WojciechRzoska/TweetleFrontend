@@ -4,7 +4,7 @@ import { ForwardedRef, InputHTMLAttributes, Ref, forwardRef } from 'react';
 import { Select } from 'components/atoms/Select/Select';
 import { Textarea } from 'components/atoms/Textarea/Textarea';
 import { Input } from 'components/atoms/Input/Input';
-import { FieldError } from 'react-hook-form';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import { Wrapper } from './FormField.style';
 
 export interface FormFieldProps
@@ -66,7 +66,7 @@ const FormField = forwardRef<
             ref={ref as Ref<HTMLSelectElement>}
             {...props}
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               {selectLabel}
             </option>
             {options?.map((value) => (
