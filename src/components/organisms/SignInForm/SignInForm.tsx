@@ -4,11 +4,7 @@ import { StyledButton } from 'components/atoms/Button/Button';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AuthProvider } from 'hooks/useAuth';
 import Signup from 'views/Singup/Signup';
-import {
-  CreateAccountButton,
-  StyledSingupButton,
-  Wrapper,
-} from './SignInForm.style';
+import { CreateAccountButton, Wrapper } from './SignInForm.style';
 import useModal from '../Modal/useModal';
 import Modal from '../Modal/Modal';
 

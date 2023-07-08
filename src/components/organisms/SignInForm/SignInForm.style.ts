@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.form`
@@ -32,6 +31,9 @@ export const CreateAccountButton = styled.button`
   color: ${({ theme }) => theme.colors.darkBlue};
   font-size: 1.3rem;
   font-weight: bold;
+  &:hover {
+    color: ${({ theme }) => theme.colors.mainBlue};
+  }
 `;
 export const StyledSingupButton = styled.button`
   border: none;
